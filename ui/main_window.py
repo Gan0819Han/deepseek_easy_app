@@ -7,14 +7,49 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 from api_client import DeepseekThread
+from PyQt5.QtGui import QIcon
 
 class DeepseekWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.message_history = []
-        self.system_prompt = ""  # 新增系统提示词存储
+        self.system_prompt = ""
         self.initUI()
+        self.load_styles()  # 新增样式初始化
     
+    def load_styles(self):
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: white;
+                font-family: '微软雅黑';
+            }
+            QTextEdit, QLineEdit {
+                background-color: white;
+                color: #333333;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                padding: 5px;
+            }
+            QPushButton {
+                background-color: #0078D4;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #006CBB;
+            }
+            QLabel {
+                color: #666666;
+                font-weight: bold;
+            }
+            QSplitter::handle {
+                background: #E0E0E0;
+                height: 5px;
+            }
+        """)
+
     def initUI(self):
         self.setWindowTitle('Deepseek 助手')
         self.setGeometry(100, 100, 1000, 600)
